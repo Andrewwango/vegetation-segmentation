@@ -57,7 +57,6 @@ class DeepLabv3Model:
 
             for imgs, masks in tqdm(train_loader):
                 imgs = imgs.to(self.device)
-                print(imgs.shape)
                 masks = masks.to(self.device)
 
                 self.optimizer.zero_grad()
