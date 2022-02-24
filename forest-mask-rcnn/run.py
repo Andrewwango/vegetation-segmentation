@@ -17,6 +17,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 def my_collate(batch):
     imgs = [s[0] for s in batch]
     masks = [s[1] for s in batch]
+    print(s.shape for s in imgs)
     return torch.stack(imgs, 0), torch.stack(masks, 0)
 #for indices in batch_sampler:
     #yield collate_fn([dataset[i] for i in indices])
