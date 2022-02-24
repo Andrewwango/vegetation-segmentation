@@ -1,0 +1,1 @@
+epoch,train_loss,test_loss,train_f1_score,train_auroc,test_f1_score,test_auroc
