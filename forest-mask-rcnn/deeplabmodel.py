@@ -120,7 +120,7 @@ class DeepLabv3Model:
                     best_loss = test_loss
                     best_weights = copy.deepcopy(self.model.state_dict())
             
-            torch.save(self.model,              os.path.join(logdir, 'deeplabv3_model.pt')
+            torch.save(self.model,              os.path.join(logdir, 'deeplabv3_model.pt'))
             torch.save(self.model.state_dict(), os.path.join(logdir, 'deeplabv3_weights.pt'))
 
         time_elapsed = time.time() - since
@@ -131,5 +131,5 @@ class DeepLabv3Model:
         # load best model weights
         self.model.load_state_dict(best_weights)
         
-        torch.save(self.model,              os.path.join(logdir, 'deeplabv3_model.pt')
+        torch.save(self.model,              os.path.join(logdir, 'deeplabv3_model.pt'))
         torch.save(self.model.state_dict(), os.path.join(logdir, 'deeplabv3_weights.pt'))
