@@ -83,11 +83,11 @@ class DeepLabv3Model:
             self.model.eval()
 
             for imgs,masks in tqdm(test_loader):
-                imgs = imgs.to(device)
-                masks = masks.to(device)
+                imgs = imgs.to(self.device)
+                masks = masks.to(self.device)
 
                 with torch.set_grad_enabled(False):
-                    outputs = model(imgs)
+                    outputs = self.model(imgs)
                     loss = self.criterion(outputs['out'], masks)
                     y_pred = outputs['out'].data.cpu().numpy().ravel()
                     y_true = masks.data.cpu().numpy().ravel()
