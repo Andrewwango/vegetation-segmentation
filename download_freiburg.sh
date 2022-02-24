@@ -6,8 +6,8 @@ wget -c http://deepscene.cs.uni-freiburg.de/static/datasets/freiburg_forest_anno
 cat freiburg_forest_annotated.tar.gz.part-a* > freiburg_forest_annotated.tar.gz
 
 echo "unzipping..."
-tar -xvzf community_images.tar.gz
-rm -y freiburg_forest_annotated.tar.gz*
+tar -xvzf freiburg_forest_annotated.tar.gz
+rm -f freiburg_forest_annotated.tar.gz*
 
 echo "moving"
 mv "freiburg_forest_annotated/train/rgb/*.jpg" "forest-mask-rcnn/data/freiburg/train/img"
