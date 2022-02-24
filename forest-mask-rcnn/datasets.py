@@ -50,7 +50,7 @@ class FreiburgDataset(VisionDataset):
         img = convert_from_color_mode(img, self.image_color_mode)
         mask = Image.open(mask_path)
         mask = convert_from_color_mode(mask, self.mask_color_mode)
-        
+        print(mask.shape)
         masks = np.all(mask == self.obj_ids[:, None, None], axis=3).astype(np.uint8) * 255
 
         #img = img.transpose(1,2,0)
