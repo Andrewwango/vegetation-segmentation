@@ -59,5 +59,5 @@ class FreiburgDataset(VisionDataset):
         if self.transforms:
             img = self.transforms(img)
             masks = self.transforms(masks)
-        print(idx, img.shape)
+        #print(idx, img.shape)
         return img, masks
