@@ -10,7 +10,7 @@
 #rm -f freiburg_forest_annotated.tar.gz*
 
 echo "moving"
-mv "freiburg_forest_annotated/train/rgb/*" "forest-mask-rcnn/data/freiburg/train/img"
-mv "freiburg_forest_annotated/train/GT_color/*" "forest-mask-rcnn/data/freiburg/train/mask"
-mv "freiburg_forest_annotated/test/rgb/*" "forest-mask-rcnn/data/freiburg/test/img"
-mv "freiburg_forest_annotated/test/GT_color/*" "forest-mask-rcnn/data/freiburg/test/mask"
+mv "/freiburg_forest_annotated/train/rgb/*" "/forest-mask-rcnn/data/freiburg/train/img"
+mv "/freiburg_forest_annotated/train/GT_color/*" "/forest-mask-rcnn/data/freiburg/train/mask"
+mv "/freiburg_forest_annotated/test/rgb/*" "/forest-mask-rcnn/data/freiburg/test/img"
+mv "/freiburg_forest_annotated/test/GT_color/*" "/forest-mask-rcnn/data/freiburg/test/mask"
