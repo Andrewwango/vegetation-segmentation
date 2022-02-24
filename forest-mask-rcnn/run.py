@@ -24,8 +24,8 @@ def my_collate(batch):
 def cf(batch):
     return tuple(zip(*batch))
 
-train_loader = torch.utils.data.DataLoader(fd_train, batch_size=batch_size, shuffle=True, collate_fn=cf)
-test_loader  = torch.utils.data.DataLoader(fd_test , batch_size=batch_size, shuffle=True, collate_fn=cf)
+train_loader = torch.utils.data.DataLoader(fd_train, batch_size=batch_size, shuffle=True, collate_fn=my_collate)
+test_loader  = torch.utils.data.DataLoader(fd_test , batch_size=batch_size, shuffle=True, collate_fn=my_collate)
 
 n_classes = fd_train[0][1].shape[0]
 print(n_classes)
