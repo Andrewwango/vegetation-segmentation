@@ -35,7 +35,7 @@ class FreiburgDataset(VisionDataset):
                                  [0, 60, 0],
                                  [0, 120, 255],
                                  [0, 0, 0]])
-        
+        self.obj_names = ["Road", "Grass", "Vegetation", "Tree", "Sky", "Obstacle"]
         self.transforms = transforms.Compose([transforms.ToTensor(),
                                               transforms.CenterCrop((480, 880))])
 

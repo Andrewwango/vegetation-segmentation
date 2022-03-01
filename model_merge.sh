@@ -1,0 +1,1 @@
+cat forest-mask-rcnn/results/xaa forest-mask-rcnn/results/xab > forest-mask-rcnn/results/deeplabv3_model.pt
