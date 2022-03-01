@@ -10,13 +10,13 @@ from sklearn.metrics import f1_score, roc_auc_score
 from utils import *
 
 fd_train = FreiburgDataset("data/freiburg/train")
-fd_test = FreiburgDataset("data/freiburg/test")
+fd_val = FreiburgDataset("data/freiburg/val")
 
 batch_size=8
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 train_loader = torch.utils.data.DataLoader(fd_train, batch_size=batch_size, shuffle=True, collate_fn=cf)
-test_loader  = torch.utils.data.DataLoader(fd_test , batch_size=batch_size, shuffle=True, collate_fn=cf)
+test_loader  = torch.utils.data.DataLoader(fd_val , batch_size=batch_size, shuffle=True, collate_fn=cf)
 
 n_classes = fd_train[0][1].shape[0]
 print(n_classes)
