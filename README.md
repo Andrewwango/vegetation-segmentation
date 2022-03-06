@@ -1,2 +1,2 @@
 # forest-mask-rcnn
-Mask R-CNN for semantic segmentation of forest scenes
+Deeplabv3 and Monodepth2 for semantic segmentation of forest scenes
