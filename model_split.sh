@@ -1,1 +1,0 @@
-split -n 3 forest-mask-rcnn/results/deeplabv3_model.pt forest-mask-rcnn/results/deeplabv3_model.pt.part_

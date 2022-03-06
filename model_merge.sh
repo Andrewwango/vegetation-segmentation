@@ -1,1 +1,0 @@
-cat forest-mask-rcnn/results/deeplabv3_model.pt.part_* > forest-mask-rcnn/results/deeplabv3_model.pt

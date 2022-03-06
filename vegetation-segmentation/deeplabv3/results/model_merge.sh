@@ -1,0 +1,1 @@
+cat deeplabv3_model.pt.part_* > deeplabv3_model.pt

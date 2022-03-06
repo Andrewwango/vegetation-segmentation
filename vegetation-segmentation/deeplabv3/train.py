@@ -9,8 +9,8 @@ from deeplabmodel import DeepLabv3Model
 from sklearn.metrics import f1_score, roc_auc_score
 from utils import *
 
-fd_train = FreiburgDataset("data/freiburg/train")
-fd_val = FreiburgDataset("data/freiburg/val")
+fd_train = FreiburgDataset("../data/freiburg/train")
+fd_val = FreiburgDataset("../data/freiburg/val")
 
 batch_size=8
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
