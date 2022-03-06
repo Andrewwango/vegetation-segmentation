@@ -91,7 +91,7 @@ class FreiburgTestDataset(VisionDataset):
 
         self.image_color_mode = image_color_mode
         self.transforms = transforms.Compose([transforms.ToTensor(),
-                                              transforms.CenterCrop((480, 880))])
+                                              transforms.Resize((480, 880))])
 
     def __len__(self):
         return len(self.imgs)
