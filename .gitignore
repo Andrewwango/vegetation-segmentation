@@ -1,6 +1,10 @@
 *.png
 *.jpg
 *.pt
+*.zip
+*.tar
+*.gz
+*.pth
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

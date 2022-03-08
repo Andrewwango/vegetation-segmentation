@@ -14,6 +14,11 @@ def convert_from_color_mode(img, color_mode):
         a = img
     return np.array(a)
 
+
+our_transforms = transforms.Compose([transforms.ToTensor(),
+                                     transforms.Resize((480, 880))])
+
+
 class FreiburgDataset(VisionDataset):
     def __init__(self, root,
                  seed=None,ext_img='.jpg', ext_mask='.png',
@@ -36,8 +41,7 @@ class FreiburgDataset(VisionDataset):
                                  [0, 120, 255],
                                  [0, 0, 0]])
         self.obj_names = ["Road", "Grass", "Vegetation", "Tree", "Sky", "Obstacle"]
-        self.transforms = transforms.Compose([transforms.ToTensor(),
-                                              transforms.CenterCrop((480, 880))])
+        self.transforms = our_transforms
 
     def __len__(self):
         return len(self.imgs)
@@ -56,28 +60,12 @@ class FreiburgDataset(VisionDataset):
 
         #img = img.transpose(1,2,0)
         
-        
         if self.transforms:
             img = self.transforms(img)
             masks = self.transforms(masks)
         
         return img, masks
 
-import os
-import numpy as np
-import torch
-from PIL import Image
-from torchvision.datasets.vision import VisionDataset
-from torchvision import transforms
-
-def convert_from_color_mode(img, color_mode):
-    if color_mode == "rgb":
-        a = img.convert("RGB")
-    elif color_mode == "grayscale":
-        a = img.convert("L")
-    else:
-        a = img
-    return np.array(a)
 
 class FreiburgTestDataset(VisionDataset):
     def __init__(self, root,
@@ -90,8 +78,7 @@ class FreiburgTestDataset(VisionDataset):
         self.imgs  = [p for p in sorted(os.listdir(os.path.join(root, "img")))  if p.endswith(ext_img)]
 
         self.image_color_mode = image_color_mode
-        self.transforms = transforms.Compose([transforms.ToTensor(),
-                                              transforms.Resize((480, 880))])
+        self.transforms = our_transforms
 
     def __len__(self):
         return len(self.imgs)
