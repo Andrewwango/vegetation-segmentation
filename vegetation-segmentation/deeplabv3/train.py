@@ -25,7 +25,7 @@ model = DeepLabv3Model(batch_size=batch_size,
                        device=device,
                        n_classes=n_classes,
                        criterion=torch.nn.CrossEntropyLoss(reduction='mean'),
-                       epochs=5,
+                       epochs=15,
                        lr=1e-4)
 
 
