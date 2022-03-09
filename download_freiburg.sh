@@ -12,8 +12,8 @@ rm -f freiburg_forest_annotated.tar.gz*
 echo "moving"
 mv freiburg_forest_annotated/train/rgb/* vegetation-segmentation/data/freiburg/train/img
 mv freiburg_forest_annotated/train/GT_color/* vegetation-segmentation/data/freiburg/train/mask
-mv freiburg_forest_annotated/test/rgb/* vegetation-segmentation/data/freiburg/test/img
-mv freiburg_forest_annotated/test/GT_color/* vegetation-segmentation/data/freiburg/test/mask
+mv freiburg_forest_annotated/val/rgb/* vegetation-segmentation/data/freiburg/test/img
+mv freiburg_forest_annotated/val/GT_color/* vegetation-segmentation/data/freiburg/test/mask
 
 echo "deleting"
 rm -rf freiburg_forest_annotated
