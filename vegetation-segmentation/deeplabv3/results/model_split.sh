@@ -1,1 +1,1 @@
-split -n 3 deeplabv3_model.pt deeplabv3/results/deeplabv3_model.pt.part_
+split -n 3 deeplabv3_model.pt deeplabv3_model.pt.part_
