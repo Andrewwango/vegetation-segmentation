@@ -24,7 +24,7 @@ with torch.no_grad():
     test_mask_pred = deeplabv3_model(test_img)['out']
 
 
-for i in range(batch_size):
+"""for i in range(batch_size):
     test_img_current = dn(test_img)[i].transpose(1,2,0)
     test_mask_current = dn(test_mask_pred)[i]
     
@@ -40,4 +40,17 @@ for i in range(batch_size):
     axs[1,1].title.set_text('Sky')
   
     plt.savefig(f'data/freiburg/test/preds/image{i}.png')
+    #plt.show()"""
+
+for i in range(batch_size):
+    test_img_current = dn(test_img)[i].transpose(1,2,0)
+    test_mask_current = dn(test_mask_pred)[i]
+
+    final_mat=0.3*nut(test_mask_current[0])+0.6*nut(test_mask_current[4])+0.8*nut(test_mask_current[2])+1.2*nut(test_mask_current[1])
+
+    
+    final_mat = np.where(final_mat == 1.5, 0.3, final_mat)
+    final_mat=np.clip(final_mat,0,1.2)
+    plt.imshow(final_mat, cmap='viridis',interpolation='nearest')
+    plt.savefig(f'data/freiburg/test/stacked_preds/image{i}.jpg')
     #plt.show()
