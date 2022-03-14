@@ -48,9 +48,9 @@ filenames_preds= glob.glob(r"/Users/adityajain/Documents/Modules IIB/4M25 Advanc
 
 for count in range(len(filenames_preds)):
     if counter<=13:
-        images = [Image.open(x) for x in [f'img/0{50*counter+300}.jpg',f'stacked_preds/image{counter}.jpg']]
+        images = [Image.open(x) for x in [f'img/0{50*counter+300}.jpg',f'vegetation-segmentation/data/freiburg/test/stacked_preds/image{counter}.jpg']]
     else:
-        images = [Image.open(x) for x in [f'img/{50*counter+300}.jpg',f'stacked_preds/image{counter}.jpg']]
+        images = [Image.open(x) for x in [f'img/{50*counter+300}.jpg',f'vegetation-segmentation/data/freiburg/test/stacked_preds/image{counter}.jpg']]
     
     widths, heights = zip(*(i.size for i in images))
 
@@ -64,5 +64,5 @@ for count in range(len(filenames_preds)):
         new_im.paste(im, (x_offset,0))
         x_offset += im.size[0]
 
-    new_im.save(f'preds_plus_real/{counter}.jpg')
+    new_im.save(f'vegetation-segmentation/data/freiburg/test/preds_plus_real/{counter}.jpg')
     counter+=1
