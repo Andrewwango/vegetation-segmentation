@@ -1,7 +1,7 @@
 import shutil, os
 import numpy as np
 files = []
-numbers=np.linspace(300, 2800,51)
+numbers=np.linspace(300, 2800,101)
 int_numbers=numbers.astype(int)
 for num in int_numbers:
     if num<1000:

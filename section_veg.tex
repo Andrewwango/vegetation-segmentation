@@ -1,0 +1,51 @@
+\subsection{Vegetation quantification literature}
+Vegetation quantification is an important task in many fields of practical environmental monitoring. We focus on applications where we are looking at face-forward scenes of low-level, local forest vegetation. This can be, for example, as seen from head height as one walks through a forest, or as a UAV or autonomous robotic vehicle traverses a forest. We do not consider solutions or techniques designed with a) satellite or b) birds eye view imagery, as we won't be able to extract local details in dense forest cover. 
+
+TODO: emphasise that our method is adaptable to various kinds of small low-level vegetation, e.g. shrubbery, protected species etc. It's only a matter of changing the segmentation categories when labelling. ResNet has huge image and pattern recognition capabilities that we're not harnessing in this example.
+
+Current methods of vegetation quantification are largely manual and inefficient, and very few use image analysis. Of those who do, [CITE]. Most current practices involve sampling in the field.  [CITE Wild Ennerdale] use quadrat sampling at sparse locations and at the timescale of about twice a decade, to monitor forest conservation and rewilding efforts in the forest. This sort of technique involves calculating a rough estimate of percentage cover using the DOMIN scale [CITE], and spatial and temporal extrapolation to give an indicator of vegetation cover in the forest. [TODO: other sampling based methods. Similar in principle to counting trees lol]
+
+\subsection{Comparison of our method}
+We assess the quality of our automated image-based vegetation quantification method by comparing it to manual methods. Because it is not possible for us to manually sample from the physical locations of our forest image datasets, we must use manual image-based analysis to obtain human-assessed labels of the vegetation in the scenes. We use a qualitative scale, for example the DAFOR scale, to obtain these labels. [CITE] For simplicity, we shall compare the scaled aggregated quantities of either grass or all non-grass vegetation, but the method is generalisable to other types of vegetation. For a given video taken in a forest we compare our human vegetation estimates of each frame with our model estimations, and assess the accuracy on this comparison.
+
+\subsection{Vegetation labelling and ground truth model}
+Given an image, we consider the vegetation present in the \textit{vicinity} $\mathcal{V}$ of the current scene, denoted by the vegetation index of the $k$th class $VI_k$. Then the quantity of the $k$th type of vegetation present in a video can be described by the vegetation index time series $VI_{k,t}$, calculated at each $\mathcal{V}_t$. These vegetation index truths allow us to assess our model predictions $\hat{VI}_{k,t}$.
+
+Firstly we consider the vicinity to be all points in the scene that are, from a human interpretation of the scene, close to the camera, i.e. 
+$$\mathcal{V} = {x,y} : \mathcal{D}_w(x,y¦¦x_c, y_c)\leq \gamma_w$$, 
+
+where $x,y$ are real world coordinates, $x_c, y_c$ are the camera coordinates in the real world, $\mathcal{D}_w(\dot¦¦\dot)$ is a real world distance measurement, and $\gamma_w$ is some distance threshold in the real world. 
+
+Then we create the manual vegetation index labels by using the DAFOR scale on the each image's vicinity. This involves deciding whether the vegetation in the vicinity is Dominant, Abundant, Frequent, Occasional or Rare in the scene. We only consider two categories: generic vegetation and grass for the sake of simplicity, but this can be expanded to any given categories [TODO: can keep it general here and move this to experiments?]. These labels can be related to the Braun-Blanquet scale by [CITE]. This gives us categorical labels $VI_{k,t}$ for each vegetation type at each point in time through the video, which can be converted to integers through the Braun-Blanquet scale.
+
+
+\subsection{Vegetation model}
+Given this ground truth model above, our model behaves in a similar way: detect the vicinity of the scene and identify the vegetation present. Firstly, we assume that $\mathcal{D}_w(\dot¦¦x_c,y_c)$ is proportional to the \textit{depth} $D_w$ of a real world point $x,y$:
+
+$$\mathcal{D}_w(x,y¦¦x_c,y_c) \propto D_w(x,y)$$
+
+Then, given only the pixels of an image $u,v$, we approximate the depth $D_w(x,y)$ with a function $\hat{D}(u,v)$ called the pixel depth map, that we learn from data. Note this is implicity performing a pixel-to-world camera calibration $(u,v)->(x,y)$. Then the vicinity in the image scene $\hat{\mathcal{V}}$ is
+
+$$\hat{\mathcal{V}} = {u,v} : \hat{D}(u,v)\leq \hat{\gamma}$$
+
+where $\hat{\gamma}$ is set manually: further work will calculate this parameter by calibrating the exactness of the real-world vicinity to that calculated by the depth map. For now, we surmount this challenge by calibrating the whole time-series by the vegetation index of the first image, with a factor $\frac{VI_{k,0}}_{\hat{VI}_{k,0}}$.
+
+Next, to identiy the vegetation present, we learn a function from data called the pixel classification map to assign class labels to each pixel in a scene, representing for example, vegetation, grass, sky etc.:
+
+$$\hat{Z}(u_i,v_i) -> z_i, z_i \in \mathcal{K} = {1,2, \ellipsis K}$$
+
+Finally, the vegetation index is estimated by the model as:
+
+$$\hat{VI}_{k,t}=\sigma_{(u_i,v_i)\in \hat{\mathcal{V}}} \mathcal{I}(z_i=k) \hat{D}(u_i,v_i)$$
+
+where we multiply by the depth too to correct for the size of pixels at different depths in the frame. Below we detail the models used for estimating the functions $\hat{D}(u,v)$ and $\hat{Z}(u,v)$.
+
+\subsubsection{Depth estimation}
+The task of estimating the pixel depth map function $\hat{D}(u,v)$ from a single frame is called monocular depth estimation. TODO: explanation...
+
+\subsubsection{Pixel classification}
+The task of estimating the pixel classification map function $\hat{Z}(u,v)$ is called semantic segmentation. TODO: explanation...
+
+\section{Results}
+
+Assessment of $VI_{k,t}$ vs $\hat{VI}_{k,t}$
