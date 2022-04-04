@@ -5,6 +5,7 @@ from PIL import Image
 from torchvision.datasets.vision import VisionDataset
 from torchvision import transforms
 
+
 def convert_from_color_mode(img, color_mode):
     if color_mode == "rgb":
         a = img.convert("RGB")
@@ -90,3 +91,27 @@ class FreiburgTestDataset(VisionDataset):
         if self.transforms:
             img = self.transforms(img)        
         return img
+
+class FreiburgDepthTestDataset(VisionDataset):
+    def __init__(self, root,
+                 seed=None,ext_img='.png',
+                ):
+
+        super().__init__(root, transforms)
+        
+        self.depths  = [p for p in sorted(os.listdir(os.path.join(root, "depth")))  if p.endswith(ext_img)]
+
+        self.transforms = transforms.Compose([Image.fromarray,
+                                                     lambda x: x.resize((640, 192), Image.LANCZOS), 
+                                                     transforms.ToTensor()])
+
+    def __len__(self):
+        return len(self.depths)
+
+    def __getitem__(self, idx):
+        depth_path  = os.path.join(self.root, "depth",  self.depths[idx])
+        depth = Image.open(depth_path)
+        depth = convert_from_color_mode(depth, "grayscale")
+        if self.transforms:
+            depth = self.transforms(depth)        
+        return depth

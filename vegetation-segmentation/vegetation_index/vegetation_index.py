@@ -1,5 +1,5 @@
 import numpy as np
-
+from sklearn.metrics import mean_absolute_percentage_error
 
 # sum pixels or sum the pre-thresholded softmaxes?
 # aggregate vegetation/grass/trees? Maybe just vegetation?
@@ -18,4 +18,9 @@ def vegetation_index(mask, depth):
     count_vegetation = pixels_vegetation.sum(axis=1).sum(axis=1)
     
     return {"grass": count_grass, "vegetation": count_vegetation}
-    
+
+def score(x_true, x_pred):
+    scale_factor = np.median(x_pred / x_true)
+    x_pred_scaled = x_pred / scale_factor
+    score = mean_absolute_percentage_error(x_true, x_pred_scaled)
+    return score, x_pred_scaled

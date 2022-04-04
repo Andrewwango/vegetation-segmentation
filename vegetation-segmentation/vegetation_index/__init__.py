@@ -1,1 +1,1 @@
-from .vegetation_index import vegetation_index
+from .vegetation_index import vegetation_index, score
