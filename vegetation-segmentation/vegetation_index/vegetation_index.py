@@ -20,7 +20,7 @@ def vegetation_index(mask, depth):
     return {"grass": count_grass, "vegetation": count_vegetation}
 
 def score(x_true, x_pred):
-    scale_factor = np.median(x_pred / x_true)
-    x_pred_scaled = x_pred / scale_factor
-    score = mean_absolute_percentage_error(x_true, x_pred_scaled)
-    return score, x_pred_scaled
+    #scale_factor = x_pred[0]/x_true[0]
+    #x_pred_scaled = x_pred / scale_factor
+    #score = mean_absolute_percentage_error(x_true, x_pred_scaled)
+    return np.corrcoef(x_true, x_pred)[0,1]#, x_pred_scaled
